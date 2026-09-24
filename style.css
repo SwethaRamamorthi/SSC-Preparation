@@ -1229,3 +1229,25 @@ body.distraction-free .view-section {
   0%, 100% { box-shadow: 0 0 50px rgba(139, 92, 246, 0.25), 0 0 30px rgba(245, 158, 11, 0.2); }
   50% { box-shadow: 0 0 70px rgba(139, 92, 246, 0.4), 0 0 45px rgba(245, 158, 11, 0.35); }
 }
+
+/* Sidebar Backdrop on Mobile */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 95;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Quote Fade Transition */
+#daily-motivation-quote {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}

@@ -194,7 +194,15 @@ function updateGreeting() {
    ========================================================================== */
 
 function setupNavigation() {
-  window.addEventListener("hashchange", renderCurrentView);
+  window.addEventListener("hashchange", () => {
+    renderCurrentView();
+    // Auto close mobile sidebar on navigation change
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar && window.innerWidth <= 1024) {
+      sidebar.classList.remove("open");
+      removeSidebarBackdrop();
+    }
+  });
 
   // Mobile sidebar toggle
   const mobileBtn = document.getElementById("mobile-menu-btn");
@@ -202,138 +210,93 @@ function setupNavigation() {
   if (mobileBtn && sidebar) {
     mobileBtn.addEventListener("click", () => {
       sidebar.classList.toggle("open");
-    });
-  }
-}
-
-function renderCurrentView() {
-  const hash = window.location.hash || "#dashboard";
-  const viewId = hash.replace("#", "");
-
-  // Update active nav links
-  document.querySelectorAll(".nav-item, .mobile-nav-item").forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === hash) {
-      link.classList.add("active");
-    }
-  });
-
-  // Hide all view sections
-  document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
-
-  // Find target view section
-  const targetView = document.getElementById(`view-${viewId}`) || document.getElementById("view-dashboard");
-  if (targetView) targetView.classList.add("active");
-
-  // Specific render handlers for views
-  if (viewId === "pyq") renderPYQView();
-  else if (viewId === "practice") renderPracticeView();
-  else if (viewId === "mock-test") renderMockTestView();
-  else if (viewId === "mistakes") renderMistakeBookView();
-  else if (viewId === "saved") renderSavedQuestionsView();
-  else if (viewId === "progress") renderProgressView();
-  else if (viewId === "daily") renderDailyChallengeView();
-  else if (viewId === "sprint") renderStudyPlanView();
-  else if (viewId === "shortcuts") renderShortcutsView();
-  else renderDashboardView();
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-/* ==========================================================================
-   4. DASHBOARD VIEW RENDER & METRICS
-   ========================================================================== */
-
-function renderDashboardView() {
-  updateDashboardMetrics();
-  renderChecklist();
-  renderMotivationQuote();
-}
-
-function updateDashboardMetrics() {
-  const attemptsKeys = Object.keys(AppState.userAttempts);
-  const totalAttempted = attemptsKeys.length;
-
-  let correctCount = 0;
-  attemptsKeys.forEach(qId => {
-    if (AppState.userAttempts[qId].isCorrect) correctCount++;
-  });
-
-  const accuracy = totalAttempted > 0 ? Math.round((correctCount / totalAttempted) * 100) : 0;
-
-  const attemptedEl = document.getElementById("dash-attempted");
-  const accuracyEl = document.getElementById("dash-accuracy");
-  const streakEl = document.getElementById("dash-streak");
-  const mistakesCountEl = document.getElementById("dash-mistakes-count");
-
-  if (attemptedEl) attemptedEl.textContent = totalAttempted;
-  if (accuracyEl) accuracyEl.textContent = `${accuracy}%`;
-  if (streakEl) streakEl.textContent = `🔥 ${AppState.streak.count}`;
-  if (mistakesCountEl) mistakesCountEl.textContent = AppState.mistakes.length;
-
-  // Subject Progress Calculation
-  const subjects = [
-    { name: "General Intelligence & Reasoning", key: "reasoning", barId: "bar-reasoning", textId: "txt-reasoning" },
-    { name: "Quantitative Aptitude", key: "quant", barId: "bar-quant", textId: "txt-quant" },
-    { name: "English Comprehension", key: "english", barId: "bar-english", textId: "txt-english" },
-    { name: "General Awareness", key: "ga", barId: "bar-ga", textId: "txt-ga" }
-  ];
-
-  subjects.forEach(sub => {
-    const subQuestions = AppState.questions.filter(q => q.subject === sub.name);
-    const subTotal = subQuestions.length;
-    let subAttempted = 0;
-    let subCorrect = 0;
-
-    subQuestions.forEach(q => {
-      if (AppState.userAttempts[q.id]) {
-        subAttempted++;
-        if (AppState.userAttempts[q.id].isCorrect) subCorrect++;
+      if (sidebar.classList.contains("open")) {
+        createSidebarBackdrop();
+      } else {
+        removeSidebarBackdrop();
       }
     });
+  }
 
-    const subAcc = subAttempted > 0 ? Math.round((subCorrect / subAttempted) * 100) : 0;
-    const bar = document.getElementById(sub.barId);
-    const txt = document.getElementById(sub.textId);
-
-    if (bar) bar.style.width = `${subAcc}%`;
-    if (txt) txt.textContent = `${subAcc}% (${subCorrect}/${subAttempted})`;
+  // Auto-close sidebar when clicking any sidebar link
+  document.querySelectorAll(".sidebar .nav-item").forEach(link => {
+    link.addEventListener("click", () => {
+      if (sidebar && window.innerWidth <= 1024) {
+        sidebar.classList.remove("open");
+        removeSidebarBackdrop();
+      }
+    });
   });
 }
 
-function renderChecklist() {
-  const container = document.getElementById("dashboard-checklist");
-  if (!container) return;
-
-  container.innerHTML = AppState.checklist.map(item => `
-    <div class="checklist-item ${item.done ? 'completed' : ''}">
-      <input type="checkbox" id="check-${item.id}" ${item.done ? 'checked' : ''} onchange="toggleChecklistItem(${item.id})">
-      <label for="check-${item.id}">${item.text}</label>
-    </div>
-  `).join("");
-}
-
-function toggleChecklistItem(id) {
-  const item = AppState.checklist.find(i => i.id === id);
-  if (item) {
-    item.done = !item.done;
-    saveState("checklist");
-    renderChecklist();
+function createSidebarBackdrop() {
+  let backdrop = document.getElementById("sidebar-backdrop");
+  if (!backdrop) {
+    backdrop = document.createElement("div");
+    backdrop.id = "sidebar-backdrop";
+    backdrop.className = "sidebar-backdrop";
+    document.body.appendChild(backdrop);
+    backdrop.addEventListener("click", () => {
+      const sidebar = document.querySelector(".sidebar");
+      if (sidebar) sidebar.classList.remove("open");
+      removeSidebarBackdrop();
+    });
   }
+  backdrop.classList.add("active");
 }
+
+function removeSidebarBackdrop() {
+  const backdrop = document.getElementById("sidebar-backdrop");
+  if (backdrop) backdrop.classList.remove("active");
+}
+
+let quoteIndex = 0;
+let quoteTimer = null;
+
+const MOTIVATION_QUOTES = [
+  { quote: "Swetha, today's small progress becomes tomorrow's confidence.", author: "Daily Prep Goal" },
+  { quote: "Don't chase perfection. Chase one more correct answer.", author: "Exam Strategy" },
+  { quote: "Your preparation is being built question by question.", author: "Consistency Motto" },
+  { quote: "14 October 2026 is not just a date. It is your target date.", author: "Target Mission" },
+  { quote: "One Question At A Time. One Day At A Time. One Goal At A Time.", author: "Swetha's Personal Motto" },
+  { quote: "May Lord Murugan's wisdom and Vel guide you to victory!", author: "Divine Blessing" }
+];
 
 function renderMotivationQuote() {
-  const quotes = [
-    "Swetha, today's small progress becomes tomorrow's confidence.",
-    "Don't chase perfection. Chase one more correct answer.",
-    "Your preparation is being built question by question.",
-    "14 October is not just a date. It's the target.",
-    "One Question At A Time. One Day At A Time. One Goal At A Time."
-  ];
+  displayQuoteAtIndex(quoteIndex);
 
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  if (quoteTimer) clearInterval(quoteTimer);
+  quoteTimer = setInterval(() => {
+    quoteIndex = (quoteIndex + 1) % MOTIVATION_QUOTES.length;
+    displayQuoteAtIndex(quoteIndex);
+  }, 5000);
+}
+
+function displayQuoteAtIndex(idx) {
   const quoteEl = document.getElementById("daily-motivation-quote");
-  if (quoteEl) quoteEl.textContent = `"${randomQuote}"`;
+  const authorEl = document.getElementById("daily-motivation-author");
+  if (!quoteEl) return;
+
+  const item = MOTIVATION_QUOTES[idx];
+  quoteEl.style.opacity = "0";
+  quoteEl.style.transform = "translateY(5px)";
+
+  setTimeout(() => {
+    quoteEl.textContent = `"${item.quote}"`;
+    if (authorEl) authorEl.textContent = `— ${item.author}`;
+    quoteEl.style.opacity = "1";
+    quoteEl.style.transform = "translateY(0)";
+  }, 200);
+}
+
+function nextMotivationQuote() {
+  quoteIndex = (quoteIndex + 1) % MOTIVATION_QUOTES.length;
+  displayQuoteAtIndex(quoteIndex);
+}
+
+function prevMotivationQuote() {
+  quoteIndex = (quoteIndex - 1 + MOTIVATION_QUOTES.length) % MOTIVATION_QUOTES.length;
+  displayQuoteAtIndex(quoteIndex);
 }
 
 /* ==========================================================================

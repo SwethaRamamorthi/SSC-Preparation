@@ -226,18 +226,27 @@
           </div>
 
           <div class="checklist-card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(245, 158, 11, 0.08) 100%);">
-            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
-              <img src="assets/murugan.png" alt="Lord Murugan Blessing" style="width:68px; height:68px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));">
-              <div>
-                <h3 style="font-family:var(--font-heading); font-size:1.2rem; color:var(--accent-gold); margin:0;">
-                  🌟 Swetha's Daily Motivation
-                </h3>
-                <div style="font-size:0.75rem; color:var(--accent-purple); font-weight:700;">🙏 Divine Blessing for Victory</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+              <div style="display:flex; align-items:center; gap:1rem;">
+                <img src="assets/murugan.png" alt="Lord Murugan Blessing" style="width:68px; height:68px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));">
+                <div>
+                  <h3 style="font-family:var(--font-heading); font-size:1.2rem; color:var(--accent-gold); margin:0;">
+                    🌟 Swetha's Daily Motivation
+                  </h3>
+                  <div style="font-size:0.75rem; color:var(--accent-purple); font-weight:700;">🙏 Divine Blessing for Victory</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.4rem;">
+                <button class="btn btn-secondary btn-sm" onclick="prevMotivationQuote()" style="padding:0.25rem 0.6rem;">◀</button>
+                <button class="btn btn-secondary btn-sm" onclick="nextMotivationQuote()" style="padding:0.25rem 0.6rem;">▶</button>
               </div>
             </div>
-            <p id="daily-motivation-quote" style="font-size:1.05rem; font-style:italic; line-height:1.6; color:var(--text-primary); margin-bottom:1.25rem;">
+            <p id="daily-motivation-quote" style="font-size:1.05rem; font-style:italic; line-height:1.6; color:var(--text-primary); margin-bottom:0.5rem; min-height:50px;">
               "One question solved today is one doubt removed tomorrow."
             </p>
+            <div id="daily-motivation-author" style="font-size:0.8rem; color:var(--accent-gold); text-align:right; margin-bottom:1rem; font-weight:600;">
+              — Daily Prep Goal
+            </div>
             <div style="border-top:1px solid var(--border-color); padding-top:0.85rem; font-size:0.85rem; color:var(--text-secondary);">
               <strong>Personal Motto:</strong> One Question At A Time. One Day At A Time. One Goal At A Time.
             </div>
