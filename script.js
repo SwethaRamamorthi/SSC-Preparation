@@ -29,6 +29,7 @@ const TARGET_DATE = new Date("October 14, 2026 00:00:00").getTime();
 
 // Initialize App on DOM Loaded
 document.addEventListener("DOMContentLoaded", () => {
+  initSplashScreen();
   initLocalStorage();
   loadAllQuestionData();
   startCountdownTimer();
@@ -40,6 +41,25 @@ document.addEventListener("DOMContentLoaded", () => {
   updateStreakDisplay();
   checkAdaptiveRecommendations();
 });
+
+function initSplashScreen() {
+  const splash = document.getElementById("splash-screen");
+  const statusEl = document.getElementById("splash-status");
+
+  if (!splash) return;
+
+  setTimeout(() => {
+    if (statusEl) statusEl.textContent = "Preparing 2,100+ Question Database...";
+  }, 600);
+
+  setTimeout(() => {
+    if (statusEl) statusEl.textContent = "Ready! Wishing you Victory, Swetha! 🎯";
+  }, 1500);
+
+  setTimeout(() => {
+    splash.classList.add("hidden");
+  }, 2200);
+}
 
 /* ==========================================================================
    1. DATA & LOCALSTORAGE INITIALIZATION
