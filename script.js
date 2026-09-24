@@ -294,9 +294,120 @@ function nextMotivationQuote() {
   displayQuoteAtIndex(quoteIndex);
 }
 
-function prevMotivationQuote() {
-  quoteIndex = (quoteIndex - 1 + MOTIVATION_QUOTES.length) % MOTIVATION_QUOTES.length;
-  displayQuoteAtIndex(quoteIndex);
+function renderCurrentView() {
+  const hash = window.location.hash || "#dashboard";
+  const viewId = hash.replace("#", "");
+
+  // Update active nav links
+  document.querySelectorAll(".nav-item, .mobile-nav-item").forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === hash) {
+      link.classList.add("active");
+    }
+  });
+
+  // Hide all view sections
+  document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
+
+  // Find target view section
+  const targetView = document.getElementById(`view-${viewId}`) || document.getElementById("view-dashboard");
+  if (targetView) targetView.classList.add("active");
+
+  // Specific render handlers for views
+  if (viewId === "pyq") renderPYQView();
+  else if (viewId === "practice") renderPracticeView();
+  else if (viewId === "mock-test") renderMockTestView();
+  else if (viewId === "mistakes") renderMistakeBookView();
+  else if (viewId === "saved") renderSavedQuestionsView();
+  else if (viewId === "progress") renderProgressView();
+  else if (viewId === "daily") renderDailyChallengeView();
+  else if (viewId === "sprint") renderStudyPlanView();
+  else if (viewId === "shortcuts") renderShortcutsView();
+  else renderDashboardView();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ==========================================================================
+   4. DASHBOARD VIEW RENDER & METRICS
+   ========================================================================== */
+
+function renderDashboardView() {
+  updateDashboardMetrics();
+  renderChecklist();
+  renderMotivationQuote();
+}
+
+function updateDashboardMetrics() {
+  const attemptsKeys = Object.keys(AppState.userAttempts);
+  const totalAttempted = attemptsKeys.length;
+
+  let correctCount = 0;
+  attemptsKeys.forEach(qId => {
+    if (AppState.userAttempts[qId].isCorrect) correctCount++;
+  });
+
+  const accuracy = totalAttempted > 0 ? Math.round((correctCount / totalAttempted) * 100) : 0;
+
+  const attemptedEl = document.getElementById("dash-attempted");
+  const accuracyEl = document.getElementById("dash-accuracy");
+  const streakEl = document.getElementById("dash-streak");
+  const mistakesCountEl = document.getElementById("dash-mistakes-count");
+
+  if (attemptedEl) attemptedEl.textContent = totalAttempted;
+  if (accuracyEl) accuracyEl.textContent = `${accuracy}%`;
+  if (streakEl) streakEl.textContent = `🔥 ${AppState.streak.count}`;
+  if (mistakesCountEl) mistakesCountEl.textContent = AppState.mistakes.length;
+
+  // Subject Progress Calculation
+  const subjects = [
+    { name: "General Intelligence & Reasoning", key: "reasoning", barId: "bar-reasoning", textId: "txt-reasoning" },
+    { name: "Quantitative Aptitude", key: "quant", barId: "bar-quant", textId: "txt-quant" },
+    { name: "English Comprehension", key: "english", barId: "bar-english", textId: "txt-english" },
+    { name: "General Awareness", key: "ga", barId: "bar-ga", textId: "txt-ga" }
+  ];
+
+  subjects.forEach(sub => {
+    const subQuestions = AppState.questions.filter(q => q.subject === sub.name);
+    const subTotal = subQuestions.length;
+    let subAttempted = 0;
+    let subCorrect = 0;
+
+    subQuestions.forEach(q => {
+      if (AppState.userAttempts[q.id]) {
+        subAttempted++;
+        if (AppState.userAttempts[q.id].isCorrect) subCorrect++;
+      }
+    });
+
+    const subAcc = subAttempted > 0 ? Math.round((subCorrect / subAttempted) * 100) : 0;
+    const bar = document.getElementById(sub.barId);
+    const txt = document.getElementById(sub.textId);
+
+    if (bar) bar.style.width = `${subAcc}%`;
+    if (txt) txt.textContent = `${subAcc}% (${subCorrect}/${subAttempted})`;
+  });
+}
+
+function renderChecklist() {
+  const container = document.getElementById("dashboard-checklist");
+  if (!container) return;
+
+  container.innerHTML = AppState.checklist.map(item => `
+    <div class="checklist-item ${item.done ? 'completed' : ''}">
+      <input type="checkbox" id="check-${item.id}" ${item.done ? 'checked' : ''} onchange="toggleChecklistItem(${item.id})">
+      <label for="check-${item.id}">${item.text}</label>
+    </div>
+  `).join("");
+}
+
+function toggleChecklistItem(id) {
+  const item = AppState.checklist.find(i => i.id === id);
+  if (item) {
+    item.done = !item.done;
+    saveState("checklist");
+    renderChecklist();
+  }
 }
 
 /* ==========================================================================
