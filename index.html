@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swetha's SSC CGL Command Center | Personal Exam OS</title>
+  <meta name="description" content="Personalized SSC CGL Preparation Platform built specially for Swetha Ramamoorthi. Practice PYQs, Mock Tests, Topic Arena, and track target exam date 14 October 2026.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body data-theme="dark">
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.png" alt="Command Center Logo" class="brand-logo-img">
+        <div>
+          <h1 class="brand-title">SWETHA'S SSC CGL</h1>
+          <div class="brand-subtitle">Command Center</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active"><span class="icon">🏠</span> Dashboard</a>
+        <a href="#pyq" class="nav-item"><span class="icon">📜</span> Previous Year Papers</a>
+        <a href="#practice" class="nav-item"><span class="icon">🎯</span> Sectional Training</a>
+        <a href="#mock-test" class="nav-item"><span class="icon">⏱️</span> Mock Tests</a>
+        <a href="#mistakes" class="nav-item"><span class="icon">📕</span> Mistake Book</a>
+        <a href="#saved" class="nav-item"><span class="icon">⭐</span> Saved Questions</a>
+        <a href="#daily" class="nav-item"><span class="icon">🔥</span> Daily 10 Challenge</a>
+        <a href="#progress" class="nav-item"><span class="icon">📊</span> Progress & Analytics</a>
+        <a href="#sprint" class="nav-item"><span class="icon">🏃‍♀️</span> 20-Day Sprint Plan</a>
+        <a href="#shortcuts" class="nav-item"><span class="icon">⚡</span> Shortcuts & Formulas</a>
+        <a href="#import" class="nav-item"><span class="icon">📥</span> Question Importer</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <div class="user-avatar">SR</div>
+          <div class="user-info">
+            <div class="name">Swetha Ramamoorthi</div>
+            <div class="target-tag">Target: 14 Oct 2026</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Layout -->
+    <main class="main-content">
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="global-search-input" placeholder="Search questions, topics, years...">
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="streak-pill">
+            <span class="streak-pill-count">🔥 7 DAY STREAK</span>
+          </div>
+          <button class="exam-mode-btn" id="exam-mode-btn" title="Distraction Free Exam Mode">
+            <span>🛡️ Exam Mode</span>
+          </button>
+          <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Mode">
+            <span>🌙</span> Theme
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEW 1: HOME DASHBOARD -->
+      <section id="view-dashboard" class="view-section active">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem;">
+          <div>
+            <h2 class="page-title" id="greeting-text">Good Evening, Swetha 👋</h2>
+            <p class="page-subtitle">Ready for today's preparation? "Your Government Exam Journey Starts Here."</p>
+          </div>
+        </div>
+
+        <!-- Adaptive Recommendation Alert (Dynamic) -->
+        <div id="adaptive-recommendation-banner"></div>
+
+        <!-- Target Countdown Hero Card -->
+        <div class="countdown-hero">
+          <div class="countdown-header">
+            <div>
+              <div class="countdown-label">🎯 SWETHA'S TARGET DAY</div>
+              <h2 style="font-family:var(--font-heading); font-size:1.6rem; margin-top:0.5rem; color:#ffffff;">SSC CGL Target Examination</h2>
+            </div>
+            <div class="target-date-badge">Target Date: <span>14 October 2026</span></div>
+          </div>
+
+          <div class="countdown-timer-grid">
+            <div class="timer-box">
+              <div class="timer-number" id="timer-days">00</div>
+              <div class="timer-unit">DAYS</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-number" id="timer-hours">00</div>
+              <div class="timer-unit">HOURS</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-number" id="timer-mins">00</div>
+              <div class="timer-unit">MINUTES</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-number" id="timer-secs">00</div>
+              <div class="timer-unit">SECONDS</div>
+            </div>
+          </div>
+
+          <div class="countdown-quote" id="countdown-status-text">
+            "Every question you solve today is one less question to fear tomorrow."
+          </div>
+        </div>
+
+        <!-- Dashboard Action Cards Grid -->
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-icon">📜</div>
+            <h3 class="card-title">Previous Year Papers</h3>
+            <p class="card-desc">Practice real SSC CGL question papers from 2015 to 2025 with shift-wise filters.</p>
+            <a href="#pyq" class="btn btn-primary btn-block">Explore PYQs</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">Section-wise Practice</h3>
+            <p class="card-desc">Train topic by topic in Reasoning, Quant, English, and General Awareness.</p>
+            <a href="#practice" class="btn btn-primary btn-block">Start Practice</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">⏱️</div>
+            <h3 class="card-title">Mock Tests</h3>
+            <p class="card-desc">Experience real exam conditions with 100 questions, 60 minutes & negative marking.</p>
+            <a href="#mock-test" class="btn btn-gold btn-block">Attempt Mock Test</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">📕</div>
+            <h3 class="card-title">Mistake Book</h3>
+            <p class="card-desc">Review and re-attempt questions you previously answered incorrectly.</p>
+            <a href="#mistakes" class="btn btn-secondary btn-block">Review Mistakes (<span id="dash-mistakes-count">0</span>)</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🔥</div>
+            <h3 class="card-title">Daily 10 Challenge</h3>
+            <p class="card-desc">Quick 10-question mixed test refreshed every single day.</p>
+            <a href="#daily" class="btn btn-secondary btn-block">Take Challenge</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Preparation Metrics</h3>
+            <p class="card-desc">Track questions attempted, accuracy percentage & performance analytics.</p>
+            <a href="#progress" class="btn btn-secondary btn-block">View Progress</a>
+          </div>
+        </div>
+
+        <!-- Subject Wise Accuracy Bars -->
+        <h3 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1rem;">Subject Performance Breakdown</h3>
+        <div class="subject-progress-grid">
+          <div class="subject-card">
+            <div class="subject-header">
+              <span class="subject-name">General Intelligence & Reasoning</span>
+              <span class="subject-percentage" id="txt-reasoning">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="bar-reasoning" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="subject-card">
+            <div class="subject-header">
+              <span class="subject-name">Quantitative Aptitude</span>
+              <span class="subject-percentage" id="txt-quant">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="bar-quant" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="subject-card">
+            <div class="subject-header">
+              <span class="subject-name">English Comprehension</span>
+              <span class="subject-percentage" id="txt-english">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="bar-english" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="subject-card">
+            <div class="subject-header">
+              <span class="subject-name">General Awareness</span>
+              <span class="subject-percentage" id="txt-ga">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="bar-ga" style="width: 0%;"></div></div>
+          </div>
+        </div>
+
+        <!-- Today's Target Checklist & Motivation Card -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;" class="dashboard-bottom-grid">
+          <div class="checklist-card">
+            <h3 style="font-family:var(--font-heading); font-size:1.2rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+              <span>📋</span> Today's Target Plan
+            </h3>
+            <div id="dashboard-checklist"></div>
+          </div>
+
+          <div class="checklist-card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(245, 158, 11, 0.08) 100%);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <img src="assets/murugan.png" alt="Lord Murugan Blessing" style="width:68px; height:68px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));">
+              <div>
+                <h3 style="font-family:var(--font-heading); font-size:1.2rem; color:var(--accent-gold); margin:0;">
+                  🌟 Swetha's Daily Motivation
+                </h3>
+                <div style="font-size:0.75rem; color:var(--accent-purple); font-weight:700;">🙏 Divine Blessing for Victory</div>
+              </div>
+            </div>
+            <p id="daily-motivation-quote" style="font-size:1.05rem; font-style:italic; line-height:1.6; color:var(--text-primary); margin-bottom:1.25rem;">
+              "One question solved today is one doubt removed tomorrow."
+            </p>
+            <div style="border-top:1px solid var(--border-color); padding-top:0.85rem; font-size:0.85rem; color:var(--text-secondary);">
+              <strong>Personal Motto:</strong> One Question At A Time. One Day At A Time. One Goal At A Time.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: PYQ PAPERS -->
+      <section id="view-pyq" class="view-section">
+        <h2 class="page-title">Previous Year Question Papers</h2>
+        <p class="page-subtitle">Practice verified official SSC CGL examination papers from 2015 to 2025.</p>
+
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label>Year:</label>
+            <select class="select-input" id="pyq-year-filter" onchange="renderPYQView()">
+              <option value="all">All Years</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="dashboard-grid" id="pyq-cards-grid"></div>
+      </section>
+
+      <!-- VIEW 3: PRACTICE ARENA -->
+      <section id="view-practice" class="view-section">
+        <h2 class="page-title">Sectional Training Arena</h2>
+        <p class="page-subtitle">Custom practice sessions filtered by subject, topic, difficulty & question count.</p>
+
+        <div class="filter-bar" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+          <div class="filter-group" style="flex-direction:column; align-items:flex-start;">
+            <label>Subject:</label>
+            <select class="select-input" id="practice-subject-select" style="width:100%;">
+              <option value="Quantitative Aptitude">Quantitative Aptitude</option>
+              <option value="General Intelligence & Reasoning">General Intelligence & Reasoning</option>
+              <option value="English Comprehension">English Comprehension</option>
+              <option value="General Awareness">General Awareness</option>
+            </select>
+          </div>
+
+          <div class="filter-group" style="flex-direction:column; align-items:flex-start;">
+            <label>Topic:</label>
+            <select class="select-input" id="practice-topic-select" style="width:100%;"></select>
+          </div>
+
+          <div class="filter-group" style="flex-direction:column; align-items:flex-start;">
+            <label>Difficulty:</label>
+            <select class="select-input" id="practice-difficulty-select" style="width:100%;">
+              <option value="all">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+
+          <div class="filter-group" style="flex-direction:column; align-items:flex-start;">
+            <label>Questions Count:</label>
+            <select class="select-input" id="practice-count-select" style="width:100%;">
+              <option value="10">10 Questions</option>
+              <option value="20">20 Questions</option>
+              <option value="30">30 Questions</option>
+              <option value="50">50 Questions</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-gold" style="padding:0.85rem 2rem; font-size:1rem;" onclick="startTrainingSession()">🚀 START TRAINING SESSION</button>
+      </section>
+
+      <!-- VIEW 4: MOCK TESTS -->
+      <section id="view-mock-test" class="view-section">
+        <h2 class="page-title">SSC CGL Mock Examination</h2>
+        <p class="page-subtitle">Full-length Tier-I examination conditions: 100 Questions | 200 Marks | 60 Minutes | Negative Marking (-0.50).</p>
+
+        <div class="card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.15) 100%); padding:2.5rem; margin-bottom:2rem; text-align:center;">
+          <div style="font-size:3rem; margin-bottom:1rem;">⚡</div>
+          <h2 style="font-family:var(--font-heading); font-size:1.8rem; margin-bottom:0.5rem;">SSC CGL Tier-I Official Pattern Mock</h2>
+          <p style="color:var(--text-secondary); max-width:600px; margin:0 auto 1.5rem auto;">Simulate real exam pressure. Auto-saves state in LocalStorage so progress is protected even on accidental browser refresh.</p>
+          <button class="btn btn-gold" style="padding:0.85rem 2.5rem; font-size:1.15rem;" onclick="startFullMockTest()">START FULL MOCK TEST</button>
+        </div>
+
+        <h3 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1rem;">Your Past Mock Test Scores</h3>
+        <div id="mock-test-history"></div>
+      </section>
+
+      <!-- VIEW 5: MISTAKE BOOK -->
+      <section id="view-mistakes" class="view-section">
+        <h2 class="page-title">Swetha's Mistake Book</h2>
+        <p class="page-subtitle">Review questions answered wrong during practice. Retest yourself until 100% mastery!</p>
+        <div id="mistakes-list-container"></div>
+      </section>
+
+      <!-- VIEW 6: SAVED QUESTIONS -->
+      <section id="view-saved" class="view-section">
+        <h2 class="page-title">Saved Questions</h2>
+        <p class="page-subtitle">Your bookmarked questions for quick revision.</p>
+        <div id="saved-list-container"></div>
+      </section>
+
+      <!-- VIEW 7: DAILY CHALLENGE -->
+      <section id="view-daily" class="view-section">
+        <div id="daily-challenge-card"></div>
+      </section>
+
+      <!-- VIEW 8: PROGRESS DASHBOARD -->
+      <section id="view-progress" class="view-section">
+        <h2 class="page-title">Preparation Analytics & Progress</h2>
+        <p class="page-subtitle">Visual tracking of questions solved, accuracy trends, and daily study activity.</p>
+
+        <div class="card" style="margin-bottom:2rem;">
+          <h3 style="font-family:var(--font-heading); font-size:1.2rem; margin-bottom:1.25rem;">Weekly Questions Solved Activity</h3>
+          <div id="weekly-activity-chart" style="display:flex; justify-content:space-between; align-items:flex-end; padding-top:1rem;"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 9: 20-DAY SPRINT PLAN -->
+      <section id="view-sprint" class="view-section">
+        <h2 class="page-title">Swetha's 20-Day Preparation Sprint</h2>
+        <p class="page-subtitle">Dynamic countdown sprint towards 14 October 2026 target.</p>
+
+        <div class="card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.15) 100%); padding:2rem;">
+          <div style="font-size:1.3rem; font-weight:700; color:var(--accent-gold); margin-bottom:0.5rem;">
+            ⏳ <span id="sprint-days-count">--</span> DAYS REMAINING
+          </div>
+          <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Daily Routine Strategy:</p>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:var(--radius-md);">
+              <div style="font-weight:700; color:var(--accent-purple);">🌅 Morning (08:00 - 11:00)</div>
+              <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:0.4rem;">Reasoning – 30 questions + Speed drills</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:var(--radius-md);">
+              <div style="font-weight:700; color:var(--accent-blue);">☀️ Afternoon (14:00 - 17:00)</div>
+              <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:0.4rem;">Quantitative Aptitude – 30 questions & formulas</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:var(--radius-md);">
+              <div style="font-weight:700; color:var(--accent-cyan);">🌆 Evening (18:00 - 20:00)</div>
+              <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:0.4rem;">English – 25 questions & Vocab review</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:var(--radius-md);">
+              <div style="font-weight:700; color:var(--accent-gold);">🌙 Night (21:00 - 23:00)</div>
+              <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:0.4rem;">GA – 25 questions + Mistake book revision</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 10: SHORTCUTS & FORMULAS MASTER SHEET -->
+      <section id="view-shortcuts" class="view-section">
+        <h2 class="page-title">Shortcuts & Formula Master Sheet</h2>
+        <p class="page-subtitle">Learn speed math tricks, formulas, reasoning rules, English grammar principles, and GA mnemonics.</p>
+
+        <div class="filter-bar" style="margin-bottom:1.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <button class="btn btn-sm btn-gold" onclick="filterShortcuts('all')">All Shortcuts</button>
+          <button class="btn btn-sm btn-secondary" onclick="filterShortcuts('Quantitative Aptitude')">Quantitative</button>
+          <button class="btn btn-sm btn-secondary" onclick="filterShortcuts('General Intelligence & Reasoning')">Reasoning</button>
+          <button class="btn btn-sm btn-secondary" onclick="filterShortcuts('English Comprehension')">English</button>
+          <button class="btn btn-sm btn-secondary" onclick="filterShortcuts('General Awareness')">General Awareness</button>
+        </div>
+
+        <div id="shortcuts-cards-container" class="dashboard-grid"></div>
+      </section>
+
+      <!-- VIEW 11: QUESTION IMPORTER -->
+      <section id="view-import" class="view-section">
+        <h2 class="page-title">Question Bank Manager</h2>
+        <p class="page-subtitle">Expand the question database by importing JSON or CSV question datasets.</p>
+
+        <div class="card" style="margin-bottom:1.5rem;">
+          <h3 class="card-title">Import Question Bank (JSON / Excel .xlsx)</h3>
+          <p class="card-desc">Upload an Excel (`.xlsx`) file or `.json` dataset file directly to expand Swetha's question bank.</p>
+          <input type="file" id="import-file-input" accept=".json,.xlsx,.xls" style="margin-bottom:1rem; display:block; color:var(--text-primary);">
+          <textarea id="import-json-textarea" rows="6" placeholder="Paste JSON question array here..." style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:var(--text-primary); padding:0.85rem; border-radius:var(--radius-md); font-family:monospace; margin-bottom:1rem;"></textarea>
+          <button class="btn btn-primary" onclick="handleQuestionImport()">IMPORT DATASET</button>
+        </div>
+      </section>
+
+      <!-- VIEW 12: EXAM PLAYER ENGINE -->
+      <section id="view-exam-player" class="view-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h2 id="exam-player-title" style="font-family:var(--font-heading); font-size:1.4rem;">SSC CGL Question Player</h2>
+          <button class="btn btn-gold btn-sm" onclick="submitQuizTest()">SUBMIT TEST</button>
+        </div>
+
+        <div class="exam-player-container">
+          <!-- Question Box -->
+          <div class="question-box">
+            <div class="question-header">
+              <div class="q-meta">
+                <span class="badge badge-purple" id="exam-q-number">Question 1</span>
+                <span class="badge badge-gold" id="exam-q-subject">Subject</span>
+                <span class="badge badge-blue" id="exam-q-topic">Topic</span>
+                <span style="color:var(--text-muted); font-size:0.8rem;" id="exam-q-source">Source: SSC Official</span>
+              </div>
+              <button class="bookmark-btn" id="exam-bookmark-btn">☆ Save Question</button>
+            </div>
+
+            <div class="question-text" id="exam-q-text">Loading question text...</div>
+            <div class="options-list" id="exam-options-list"></div>
+
+            <div class="player-nav-bar">
+              <button class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+              <button class="btn btn-secondary" style="border-color:var(--accent-gold); color:var(--accent-gold);" onclick="markForReview()">Mark for Review</button>
+              <button class="btn btn-primary" onclick="nextQuestion()">Save & Next</button>
+            </div>
+
+            <!-- Solution Explanation Card -->
+            <div class="explanation-card" id="exam-explanation-panel" style="display:none;"></div>
+          </div>
+
+          <!-- Exam Palette Sidebar -->
+          <div class="exam-sidebar">
+            <div class="timer-card">
+              <div class="label">Time Remaining</div>
+              <div class="time-display" id="exam-timer-display">00:00</div>
+            </div>
+
+            <div style="font-weight:700; font-size:0.9rem; margin-bottom:0.75rem; color:var(--text-secondary);">Question Palette</div>
+            <div class="palette-grid" id="exam-palette-grid"></div>
+
+            <div class="palette-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:var(--accent-blue);"></div> Answered</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--accent-gold);"></div> Review</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--success);"></div> Correct</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--danger);"></div> Wrong</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Credit Line -->
+      <footer style="padding:1.5rem 2rem; border-top:1px solid var(--border-color); text-align:center; font-size:0.9rem; color:var(--text-secondary); background:rgba(0,0,0,0.25);">
+        Developed by <strong style="color:var(--accent-gold);">Sanjay Panneerselvan</strong> for wellness of <strong style="color:var(--accent-purple);">Swetha Ramamoorthi</strong>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="#dashboard" class="mobile-nav-item active"><span class="icon">🏠</span> Home</a>
+    <a href="#pyq" class="mobile-nav-item"><span class="icon">📜</span> PYQs</a>
+    <a href="#practice" class="mobile-nav-item"><span class="icon">🎯</span> Practice</a>
+    <a href="#mock-test" class="mobile-nav-item"><span class="icon">⏱️</span> Mocks</a>
+    <a href="#mistakes" class="mobile-nav-item"><span class="icon">📕</span> Mistakes</a>
+  </nav>
+
+  <!-- Quiz Result Modal -->
+  <div id="quiz-result-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+    <div style="background:var(--bg-card); border:1px solid var(--accent-purple); border-radius:var(--radius-lg); padding:2rem; width:90%; max-width:500px; text-align:center; box-shadow:var(--shadow-lg);">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏆</div>
+      <h2 style="font-family:var(--font-heading); font-size:1.8rem; margin-bottom:0.25rem;">TEST COMPLETED!</h2>
+      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Great effort, Swetha!</p>
+
+      <div style="background:rgba(0,0,0,0.4); padding:1.25rem; border-radius:var(--radius-md); margin-bottom:1.5rem;">
+        <div style="font-size:0.85rem; color:var(--text-secondary); text-transform:uppercase;">YOUR SCORE</div>
+        <div style="font-size:2.5rem; font-weight:800; color:var(--accent-gold);" id="res-score">0 / 0</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin-bottom:1.5rem;">
+        <div style="background:var(--success-bg); padding:0.75rem; border-radius:var(--radius-sm); border:1px solid rgba(16,185,129,0.3);">
+          <div style="font-size:1.2rem; font-weight:800; color:var(--success);" id="res-correct">0</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary);">Correct</div>
+        </div>
+        <div style="background:var(--danger-bg); padding:0.75rem; border-radius:var(--radius-sm); border:1px solid rgba(239,68,68,0.3);">
+          <div style="font-size:1.2rem; font-weight:800; color:var(--danger);" id="res-wrong">0</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary);">Wrong</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+          <div style="font-size:1.2rem; font-weight:800; color:var(--accent-cyan);" id="res-accuracy">0%</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary);">Accuracy</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="closeResultModal()">REVIEW DETAILED SOLUTIONS</button>
+    </div>
+  </div>
+
+  <!-- SheetJS Library for Excel Upload Support -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Question Data Scripts -->
+  <script src="data/reasoning.js"></script>
+  <script src="data/quantitative.js"></script>
+  <script src="data/english.js"></script>
+  <script src="data/general-awareness.js"></script>
+  <script src="data/excel-questions.js"></script>
+  <script src="data/previous-years.js"></script>
+  <script src="data/shortcuts.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

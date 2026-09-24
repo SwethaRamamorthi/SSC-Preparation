@@ -1,0 +1,22 @@
+[
+  {
+    "id": "CGL2024-CUSTOM-001",
+    "year": 2024,
+    "tier": "Tier I",
+    "subject": "Quantitative Aptitude",
+    "topic": "Percentage",
+    "shift": "Shift 1",
+    "question": "If 20% of A = 50% of B, then what percentage of A is B?",
+    "options": [
+      "30%",
+      "40%",
+      "25%",
+      "50%"
+    ],
+    "answer": 1,
+    "explanation": "20/100 A = 50/100 B => 2A = 5B => B = 0.4 A = 40% of A.",
+    "shortcut": "B/A = 20/50 = 2/5 = 40%.",
+    "difficulty": "Easy",
+    "source": "Practice"
+  }
+]
