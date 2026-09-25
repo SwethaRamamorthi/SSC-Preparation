@@ -50,6 +50,7 @@
         <a href="#progress" class="nav-item"><span class="icon">📊</span> Progress & Analytics</a>
         <a href="#sprint" class="nav-item"><span class="icon">🏃‍♀️</span> 20-Day Sprint Plan</a>
         <a href="#shortcuts" class="nav-item"><span class="icon">⚡</span> Shortcuts & Formulas</a>
+        <a href="#flashcards" class="nav-item"><span class="icon">🎴</span> Speed Math Flashcards</a>
         <a href="#import" class="nav-item"><span class="icon">📥</span> Question Importer</a>
       </nav>
 
@@ -339,15 +340,25 @@
 
       <!-- VIEW 5: MISTAKE BOOK -->
       <section id="view-mistakes" class="view-section">
-        <h2 class="page-title">Swetha's Mistake Book</h2>
-        <p class="page-subtitle">Review questions answered wrong during practice. Retest yourself until 100% mastery!</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 class="page-title">Swetha's Mistake Book</h2>
+            <p class="page-subtitle">Review questions answered wrong during practice. Retest yourself until 100% mastery!</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="exportPrintablePDF('mistakes')">🖨️ PRINT / SAVE AS PDF</button>
+        </div>
         <div id="mistakes-list-container"></div>
       </section>
 
       <!-- VIEW 6: SAVED QUESTIONS -->
       <section id="view-saved" class="view-section">
-        <h2 class="page-title">Saved Questions</h2>
-        <p class="page-subtitle">Your bookmarked questions for quick revision.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 class="page-title">Saved Questions</h2>
+            <p class="page-subtitle">Your bookmarked questions for quick revision.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="exportPrintablePDF('saved')">🖨️ PRINT / SAVE AS PDF</button>
+        </div>
         <div id="saved-list-container"></div>
       </section>
 
@@ -413,6 +424,38 @@
         </div>
 
         <div id="shortcuts-cards-container" class="dashboard-grid"></div>
+      </section>
+
+      <!-- VIEW: SPEED MATH FLASHCARD ARENA -->
+      <section id="view-flashcards" class="view-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 class="page-title">Speed Math & Vocab Flashcard Arena</h2>
+            <p class="page-subtitle">Master squares, cubes, fraction-to-percentage conversions, and trigonometry values.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="startFlashcardDeck('squares')">Squares (1-50)</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFlashcardDeck('cubes')">Cubes (1-30)</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFlashcardDeck('fractions')">Fractions & %</button>
+            <button class="btn btn-secondary btn-sm" onclick="startFlashcardDeck('trigonometry')">Trigonometry</button>
+            <button class="btn btn-gold btn-sm" onclick="startTimeTrialMode()">⏱️ 60s Time Trial</button>
+          </div>
+        </div>
+
+        <div id="flashcard-container" style="max-width:600px; margin:0 auto; text-align:center;">
+          <div id="flashcard-card" class="card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.2) 100%); padding:3.5rem 2rem; cursor:pointer; min-height:260px; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; box-shadow:var(--shadow-lg); transition:transform 0.4s ease;" onclick="flipCurrentFlashcard()">
+            <div id="flashcard-tag" class="badge badge-gold" style="position:absolute; top:1rem; left:1rem;">Squares (1-50)</div>
+            <div id="flashcard-counter" style="position:absolute; top:1rem; right:1rem; color:var(--text-secondary); font-size:0.85rem;">Card 1 of 50</div>
+            <div id="flashcard-main-text" style="font-size:3.2rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">7²</div>
+            <div id="flashcard-sub-text" style="font-size:0.9rem; color:var(--accent-cyan); font-style:italic;">Tap to reveal answer</div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:1rem; margin-top:1.5rem;">
+            <button class="btn btn-secondary" onclick="prevFlashcard()">◀ Previous</button>
+            <button class="btn btn-gold" onclick="flipCurrentFlashcard()">🔄 Flip Card</button>
+            <button class="btn btn-primary" onclick="nextFlashcard()">Next ▶</button>
+          </div>
+        </div>
       </section>
 
       <!-- VIEW 11: QUESTION IMPORTER -->
@@ -540,6 +583,7 @@
   <script src="data/excel-questions.js"></script>
   <script src="data/previous-years.js"></script>
   <script src="data/shortcuts.js"></script>
+  <script src="data/flashcards.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

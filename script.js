@@ -323,6 +323,7 @@ function renderCurrentView() {
   else if (viewId === "daily") renderDailyChallengeView();
   else if (viewId === "sprint") renderStudyPlanView();
   else if (viewId === "shortcuts") renderShortcutsView();
+  else if (viewId === "flashcards") renderFlashcardsView();
   else renderDashboardView();
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1239,4 +1240,105 @@ function renderShortcutsView(subjectFilter = "all") {
 
 function filterShortcuts(subject) {
   renderShortcutsView(subject);
+}
+
+/* ==========================================================================
+   17. SPEED MATH FLASHCARD ARENA & PDF REVISION EXPORT
+   ========================================================================== */
+
+let currentFlashcardDeck = "squares";
+let currentFlashcardIndex = 0;
+let isFlashcardFlipped = false;
+let timeTrialTimer = null;
+let timeTrialSecondsLeft = 60;
+
+function renderFlashcardsView() {
+  startFlashcardDeck(currentFlashcardDeck || "squares");
+}
+
+function startFlashcardDeck(deckKey) {
+  if (!window.FLASHCARD_DECKS || !window.FLASHCARD_DECKS[deckKey]) return;
+  currentFlashcardDeck = deckKey;
+  currentFlashcardIndex = 0;
+  isFlashcardFlipped = false;
+  if (timeTrialTimer) clearInterval(timeTrialTimer);
+  updateFlashcardCardUI();
+}
+
+function updateFlashcardCardUI() {
+  const cards = window.FLASHCARD_DECKS[currentFlashcardDeck];
+  if (!cards || cards.length === 0) return;
+
+  const item = cards[currentFlashcardIndex];
+  const mainText = document.getElementById("flashcard-main-text");
+  const subText = document.getElementById("flashcard-sub-text");
+  const tagEl = document.getElementById("flashcard-tag");
+  const counterEl = document.getElementById("flashcard-counter");
+  const cardBox = document.getElementById("flashcard-card");
+
+  if (tagEl) tagEl.textContent = item.category;
+  if (counterEl) counterEl.textContent = `Card ${currentFlashcardIndex + 1} of ${cards.length}`;
+
+  if (cardBox) {
+    cardBox.style.transform = "rotateY(90deg)";
+    setTimeout(() => {
+      if (isFlashcardFlipped) {
+        if (mainText) mainText.textContent = item.back;
+        if (subText) subText.textContent = `Answer (${item.hint})`;
+        cardBox.style.background = "linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.2) 100%)";
+      } else {
+        if (mainText) mainText.textContent = item.front;
+        if (subText) subText.textContent = "Tap or click to reveal answer";
+        cardBox.style.background = "linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.2) 100%)";
+      }
+      cardBox.style.transform = "rotateY(0deg)";
+    }, 150);
+  }
+}
+
+function flipCurrentFlashcard() {
+  isFlashcardFlipped = !isFlashcardFlipped;
+  updateFlashcardCardUI();
+}
+
+function nextFlashcard() {
+  const cards = window.FLASHCARD_DECKS[currentFlashcardDeck];
+  if (!cards) return;
+  currentFlashcardIndex = (currentFlashcardIndex + 1) % cards.length;
+  isFlashcardFlipped = false;
+  updateFlashcardCardUI();
+}
+
+function prevFlashcard() {
+  const cards = window.FLASHCARD_DECKS[currentFlashcardDeck];
+  if (!cards) return;
+  currentFlashcardIndex = (currentFlashcardIndex - 1 + cards.length) % cards.length;
+  isFlashcardFlipped = false;
+  updateFlashcardCardUI();
+}
+
+function startTimeTrialMode() {
+  if (timeTrialTimer) clearInterval(timeTrialTimer);
+  timeTrialSecondsLeft = 60;
+  startFlashcardDeck("squares");
+
+  showToast("⚡ 60s Time Trial Started! Test your rapid calculations!", "info");
+
+  timeTrialTimer = setInterval(() => {
+    timeTrialSecondsLeft--;
+    const counterEl = document.getElementById("flashcard-counter");
+    if (counterEl) counterEl.textContent = `⏱️ ${timeTrialSecondsLeft}s Remaining`;
+
+    if (timeTrialSecondsLeft <= 0) {
+      clearInterval(timeTrialTimer);
+      showToast("🏆 TIME TRIAL COMPLETED! Great speed calculation practice!", "success");
+    }
+  }, 1000);
+}
+
+function exportPrintablePDF(type) {
+  showToast(`Preparing printable PDF revision document for ${type}...`, "info");
+  setTimeout(() => {
+    window.print();
+  }, 400);
 }

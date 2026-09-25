@@ -1251,3 +1251,34 @@ body.distraction-free .view-section {
 #daily-motivation-quote {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* Printable PDF Export Styles */
+@media print {
+  .sidebar, .top-header, .mobile-bottom-nav, .btn, .filter-bar, .splash-screen, .sidebar-backdrop {
+    display: none !important;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .card, .checklist-card, .question-box {
+    background: #ffffff !important;
+    border: 1px solid #ccc !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+  }
+  .page-title {
+    color: #000000 !important;
+  }
+  .badge {
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    background: #f0f0f0 !important;
+  }
+}
