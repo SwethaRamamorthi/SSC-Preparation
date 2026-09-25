@@ -1283,27 +1283,42 @@ body.distraction-free .view-section {
   }
 }
 
-/* Select Inputs & Dropdown Options Styling */
-.select-input, select {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-md);
-  outline: none;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.select-input:focus, select:focus {
-  border-color: var(--accent-purple);
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
-}
-
-/* Fix dropdown options white background issue */
-.select-input option, select option {
-  background-color: #1e1b4b !important;
+/* Select Inputs & Dropdown Options Bulletproof Styling */
+select, .select-input {
+  background-color: rgba(30, 27, 75, 0.85) !important;
   color: #ffffff !important;
-  padding: 0.6rem;
+  border: 1px solid rgba(139, 92, 246, 0.4) !important;
+  padding: 0.65rem 2.2rem 0.65rem 1rem !important;
+  border-radius: var(--radius-md) !important;
+  outline: none !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f59e0b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 1.1rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+select:focus, .select-input:focus {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Fix dropdown options white background issue on Chrome/Edge Windows */
+select option, .select-input option {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+select option:checked, select option:hover, .select-input option:checked {
+  background-color: #4c1d95 !important;
+  color: #fbbf24 !important;
 }
