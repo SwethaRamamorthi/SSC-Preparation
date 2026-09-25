@@ -49,7 +49,7 @@ function initSplashScreen() {
   if (!splash) return;
 
   setTimeout(() => {
-    if (statusEl) statusEl.textContent = "Preparing 2,100+ Question Database...";
+    if (statusEl) statusEl.textContent = "Preparing 3,000+ Question Database...";
   }, 600);
 
   setTimeout(() => {
@@ -119,6 +119,7 @@ function loadAllQuestionData() {
   if (window.ENGLISH_QUESTIONS) combined = combined.concat(window.ENGLISH_QUESTIONS);
   if (window.GA_QUESTIONS) combined = combined.concat(window.GA_QUESTIONS);
   if (window.EXCEL_QUESTIONS) combined = combined.concat(window.EXCEL_QUESTIONS);
+  if (window.PYQ_EXPANSION_QUESTIONS) combined = combined.concat(window.PYQ_EXPANSION_QUESTIONS);
 
   // Custom imported questions from LocalStorage
   const customQuestions = localStorage.getItem("swetha_ssc_custom_questions");
