@@ -1282,3 +1282,28 @@ body.distraction-free .view-section {
     background: #f0f0f0 !important;
   }
 }
+
+/* Select Inputs & Dropdown Options Styling */
+.select-input, select {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  outline: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.select-input:focus, select:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+/* Fix dropdown options white background issue */
+.select-input option, select option {
+  background-color: #1e1b4b !important;
+  color: #ffffff !important;
+  padding: 0.6rem;
+}
