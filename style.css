@@ -1311,14 +1311,14 @@ select:focus, .select-input:focus {
 
 /* Fix dropdown options white background issue on Chrome/Edge Windows */
 select option, .select-input option {
-  background-color: #0f172a !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
   font-size: 0.95rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   padding: 0.75rem 1rem !important;
 }
 
 select option:checked, select option:hover, .select-input option:checked {
-  background-color: #4c1d95 !important;
-  color: #fbbf24 !important;
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
 }
